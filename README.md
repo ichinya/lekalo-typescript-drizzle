@@ -1,26 +1,9 @@
 # lekalo-typescript-drizzle
 
-Пакет правил Drizzle ORM для [lekalo-typescript](https://github.com/ichinya/lekalo-typescript).
+Owns the drizzle implementation and its regression fixtures, extracted from `lekalo-typescript`. Lekalo core does not import this package.
 
-## Статус
+The `src/` modules are runtime integrations, consumed through explicit package exports. They require only the context passed by the invoking runtime; they do not import its private source tree. These integrations operate on the existing target-protocol IR/compiler API and are distinct from language-neutral contract checks.
 
-Репозиторий подготовлен для выделения существующей реализации. Код ещё не перенесён; пакет пока не готов к установке или использованию.
+Run package tests with `node --test adapters/node-typescript/test/drizzle-*.test.mjs`. Compiler/host integration tests require `LEKALO_TYPESCRIPT_ROOT` pointing to a built TypeScript runtime checkout. No application code or package lifecycle scripts are executed.
 
-- Перенос реализации: [#1](https://github.com/ichinya/lekalo-typescript-drizzle/issues/1).
-- Общий план: [lekalo#241](https://github.com/ichinya/lekalo/issues/241).
-
-## Ответственность пакета
-
-- Извлечение ORM schema evidence: таблицы, столбцы, отношения и привязки к symbols.
-- Drizzle-specific bindings/projection mappings и закреплённые declarations поддерживаемых версий ORM.
-- Тесты и фикстуры Drizzle для поддерживаемых SQL dialects.
-
-## Источник переноса
-
-`lekalo-typescript/adapters/node-typescript/src/drizzle-evidence.mjs`, Drizzle-ветки `scanner.mjs`, declaration closure в `build.mjs` и связанные tests/fixtures.
-
-## Границы
-
-Drizzle ORM и движок базы данных — разные зависимости. PostgreSQL DDL и engine version policy принадлежат [lekalo-postgres](https://github.com/ichinya/lekalo-postgres). Compiler и общая проверка source custody остаются у runtime/host.
-
-Версия пакета, версия provider/protocol API и версия языка или движка приложения фиксируются отдельно. Сборка и тесты должны быть автономными; источники и зависимости закрепляются точными версиями и digest. Выбор произвольного совместимого Git/local package и загрузка его зависимостей отслеживаются в [lekalo#239](https://github.com/ichinya/lekalo/issues/239).
+The TypeScript runtime's release build pins this package and includes the selected integration in its distribution. That distribution belongs to the runtime repository, not Lekalo core. Adding another language runtime requires no change to the core.
