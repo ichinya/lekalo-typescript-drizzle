@@ -1,0 +1,6 @@
+{
+  "runtime": "gh/ichinya/lekalo-typescript#1c69191ab36bd9d0b220a6ad274a66bc6bab7836",
+  "path": "tables.ts",
+  "valid": "import { pgTable as table } from 'drizzle-orm/pg-core'; export const cat = table('cat', {});",
+  "invalid": "import { pgTable as table } from 'another'; export const cat = table('cat', {});"
+}
