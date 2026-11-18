@@ -1,0 +1,47 @@
+{
+  "schema": "lekalo/contract-rules/v1",
+  "requires": [
+    "storage.tables/v1"
+  ],
+  "bindings": {
+    "typescript.exported-factories/v1": {
+      "capability": "storage.tables/v1",
+      "module": "drizzle-orm/pg-core",
+      "export": "pgTable",
+      "fact": "tables"
+    }
+  },
+  "checks": [
+    {
+      "id": "exported-table",
+      "schema": {
+        "type": "object",
+        "required": [
+          "tables"
+        ],
+        "properties": {
+          "tables": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "path"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "path": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
