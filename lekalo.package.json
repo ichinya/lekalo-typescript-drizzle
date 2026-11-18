@@ -1,0 +1,10 @@
+{
+  "schema": "lekalo/package/v1",
+  "kind": "rules",
+  "id": "lekalo-typescript-drizzle",
+  "version": "0.1.0",
+  "files": [
+    "contracts/tables.json"
+  ],
+  "rules": "contracts/tables.json"
+}
